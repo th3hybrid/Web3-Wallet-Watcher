@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@100..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+    --color-rose-quartz:#BCABAE;
+    --color-night:#0F0F0F;
+    --color-jet:#2D2E2E;
+    --color-dim-gray: #716969;
+    --color-white:#FBFBFB;
+    --font-bit-count: "Bitcount Single", sans-serif; 
+}
+
+*{
+  box-sizing: border-box;
+}
+
+body{
+    background-color: var(--color-white);
+}
