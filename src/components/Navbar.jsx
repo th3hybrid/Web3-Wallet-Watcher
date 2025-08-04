@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { IoMdSearch } from "react-icons/io";
 import { CiSettings } from "react-icons/ci";
+import useStore from "../utils/Store";
 
 const Navbar = () => {
     const [address,setAddress] = useState("");
-    const [tokenBalancesInfo, setTokenBalancesInfo] = useState();
+    const {setTokenBalancesInfo} = useStore();
 
     const handleChange = (e) => {
         setAddress(e.target.value);
