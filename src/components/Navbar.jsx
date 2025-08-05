@@ -12,14 +12,27 @@ const Navbar = () => {
     }
 
     const seeWallet = async() => {
-        const url = `https://api.covalenthq.com/v1/eth-mainnet/address/${address}/balances_v2/`;
-        const options = {method: 'GET', headers: {Authorization: 'Bearer '}, body: undefined};
+        const nftUrl = `https://api.covalenthq.com/v1/eth-mainnet/address/${address}/balances_nft/`;
+        const nftOptions = {method: 'GET', headers: {Authorization: 'Bearer '}, body: undefined};
+
+     
+        const txUrl = `https://api.covalenthq.com/v1/eth-mainnet/address/${address}/transactions_v3/`;
+        const txOptions = {method: 'GET', headers: {Authorization: 'Bearer '}, body: undefined};
+
+        const tokenUrl = `https://api.covalenthq.com/v1/eth-mainnet/address/${address}/balances_v2/`;
+        const tokenOptions = {method: 'GET', headers: {Authorization: 'Bearer '}, body: undefined};
 
         try {
-        const response = await fetch(url, options);
-        const data = await response.json();
-        console.log(data);
-        setTokenBalancesInfo(data);
+        const tokenResponse = await fetch(tokenUrl, tokenOptions);
+        const nftResponse = await fetch(nftUrl,nftOptions);
+        const txResponse = await fetch(txUrl,txOptions);
+        const tokenData = await tokenResponse.json();
+        const nftData = await nftResponse.json();
+        const txData = await txResponse.json();
+        console.log(tokenData);
+        console.log(nftData);
+        console.log(txData);
+        setTokenBalancesInfo(tokenData.data.items);
         } catch (error) {
         console.error(error);
         }
