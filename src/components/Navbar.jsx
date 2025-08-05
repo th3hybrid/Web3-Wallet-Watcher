@@ -5,7 +5,7 @@ import useStore from "../utils/Store";
 
 const Navbar = () => {
     const [address,setAddress] = useState("");
-    const {setTokenBalancesInfo} = useStore();
+    const {setTokenBalancesInfo,setNftBalancesInfo,setRecentTransactionsInfo} = useStore();
 
     const handleChange = (e) => {
         setAddress(e.target.value);
@@ -33,10 +33,11 @@ const Navbar = () => {
         console.log(nftData);
         console.log(txData);
         setTokenBalancesInfo(tokenData.data.items);
+        setNftBalancesInfo(nftData.data.items);
+        setRecentTransactionsInfo(txData.data.items);
         } catch (error) {
         console.error(error);
         }
-        console.log(address);
     }
 
 
