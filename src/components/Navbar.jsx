@@ -43,16 +43,14 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="m-4 flex gap-4 md:gap-8">
+            <nav className="m-5 flex gap-4 md:gap-8">
                 <div className="text-white bg-jet p-3 w-1/5 md:w-2/10 rounded-lg text-center flex items-center justify-center">
                  <a className="font-bit-count text-3xl" href="./">{window.innerWidth > 768 ? "WalletSeer" : "WS"}</a>
                 </div>
-                <div className="flex gap-2 items-center justify-center text-white bg-jet p-3 w-4/5 md:w-8/10 rounded-lg">
-                 <div className="relative">
-                    <input type="text" className="outline-none py-1 px-2 border-white border-1 rounded-md indent-2" placeholder="Enter Wallet Address..." onChange={handleChange} />
-                    <div className="absolute right-[1px] top-[1px] bg-white text-dim-gray p-1 rounded-r-md"><CiSettings /></div>
-                 </div>
-                    <button className="bg-dim-gray text-white p-2 md:p-4 rounded-lg" onClick={seeWallet}><IoMdSearch /></button>
+                <div className="flex gap-3 items-center px-4 text-white bg-jet w-4/5 md:w-8/10 rounded-lg">
+                 <input type="text" className="outline-none py-1 px-1 border-white border-1 rounded-md md:w-9/10" placeholder="Enter Wallet Address..." onChange={handleChange} />
+                 <button className="bg-white text-dim-gray p-2  rounded-lg cursor-pointer"><CiSettings /></button>
+                 <button className="bg-dim-gray text-white p-2 rounded-lg cursor-pointer" onClick={seeWallet}><IoMdSearch /></button>
                 </div>
             </nav>
         </>
