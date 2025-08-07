@@ -49,6 +49,9 @@ const Navbar = () => {
         const tokenData = await tokenResponse.json();
         const nftData = await nftResponse.json();
         const txData = await txResponse.json();
+        console.log(tokenData);
+        console.log(nftData);
+        console.log(txData);
         setTokenBalancesInfo(tokenData.data.items);
         setNftBalancesInfo(nftData.data.items);
         setRecentTransactionsInfo(txData.data.items);
