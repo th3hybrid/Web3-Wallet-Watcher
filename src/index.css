@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@100..900&family=Mozilla+Headline:wght@200..700&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -16,4 +16,16 @@
 
 body{
     background-color: var(--color-white);
+    font-family: "Mozilla Headline", sans-serif;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+#scrollable::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+#scrollable {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }

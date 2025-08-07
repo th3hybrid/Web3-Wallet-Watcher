@@ -4,7 +4,7 @@ import voidImg from "../assets/void.svg";
 import { LuNotepadText } from "react-icons/lu";
 
 const Dashboard = () => {
-    const { tokenBalancesInfo,nftBalancesInfo,recentTransactionsInfo } = useStore();
+    const { tokenBalancesInfo,nftBalancesInfo,recentTransactionsInfo,isLoading } = useStore();
 
     const dateConverter = (timestamp) => {
          const dateInstance = new Date(timestamp);
@@ -12,11 +12,11 @@ const Dashboard = () => {
     }
     return (
         <>
-        <div className="m-5 flex justify-between gap-3 flex-col md:flex-row font-semibold">
+        <div className="m-5 flex justify-between gap-4 flex-col md:flex-row font-semibold">
             <div className="text-white bg-jet md:w-3/10 rounded-lg p-4 ">
                 <h1 className="font-bit-count text-2xl">Token Balances</h1>
-                <div className="flex flex-col gap-3 mt-4 overflow-y-auto h-80">
-                    {tokenBalancesInfo.length != 0 ? tokenBalancesInfo.map((token) => (
+                <div className="flex flex-col gap-3 mt-4 overflow-y-auto h-80" id="scrollable">
+                    {isLoading ? <div className=" h-full text-2xl flex items-center justify-center">Loading...</div> : (tokenBalancesInfo.length != 0 ? tokenBalancesInfo.map((token) => (
                         <div key={token.contract_address} className="flex justify-between items-center">
                             <div className="flex gap-3 items-center">
                                 <img src={token.logo_url} alt="token logo" className="h-auto w-9 rounded-full"
@@ -29,13 +29,13 @@ const Dashboard = () => {
                         <div className="flex flex-col items-center justify-center "><img src={voidImg} className="h-60 w-60" alt="" />
                         <p className="text-xl mt-5">No Items Found!</p>
                         </div>
-                    </div>}
+                    </div>)}
                 </div>
             </div>
             <div className="text-white bg-jet md:w-3/10 rounded-lg p-4 ">
                  <h1 className="font-bit-count text-2xl">NFT</h1>
-                 <div className="flex flex-col gap-3 mt-4 overflow-y-auto h-80">
-                    {nftBalancesInfo.length != 0 ? nftBalancesInfo.map((token) => (
+                 <div className="flex flex-col gap-3 mt-4 overflow-y-auto h-80" id="scrollable">
+                    {isLoading ? <div className=" h-full text-2xl flex items-center justify-center">Loading...</div> : (nftBalancesInfo.length != 0 ? nftBalancesInfo.map((token) => (
                         <div key={token.contract_address} className="flex justify-between items-center">
                             <div className="flex gap-3 items-center">
                                 <img src={token.nft_data[0].external_data.image} alt="token logo" className="h-auto w-12 rounded-md"
@@ -48,13 +48,13 @@ const Dashboard = () => {
                         <div className="flex flex-col items-center justify-center "><img src={voidImg} className="h-60 w-60" alt="" />
                         <p className="text-xl mt-5">No Items Found!</p>
                         </div>
-                    </div>}
+                    </div>)}
                 </div>
             </div>
             <div className="text-white bg-jet md:w-3/10 rounded-lg p-4 ">
                  <h1 className="font-bit-count text-2xl">Transactions</h1>
-                 <div className="flex flex-col gap-3 mt-4 overflow-y-auto h-80">
-                    {recentTransactionsInfo.length != 0 ? recentTransactionsInfo.map((token) => (
+                 <div className="flex flex-col gap-3 mt-4 overflow-y-auto h-80" id="scrollable">
+                    {isLoading ? <div className=" h-full text-2xl flex items-center justify-center">Loading...</div> : (recentTransactionsInfo.length != 0 ? recentTransactionsInfo.map((token) => (
                         <div key={token.tx_hash} className="flex justify-between items-center">
                             <div className="flex gap-3 items-center">
                                 <div className="h-9 w-9 rounded-full bg-white flex items-center justify-center text-jet"><LuNotepadText /></div>
@@ -69,7 +69,7 @@ const Dashboard = () => {
                         <div className="flex flex-col items-center justify-center "><img src={voidImg} className="h-60 w-60" alt="" />
                         <p className="text-xl mt-5">No Items Found!</p>
                         </div>
-                    </div>}
+                    </div>)}
                 </div>
             </div>
         </div>
