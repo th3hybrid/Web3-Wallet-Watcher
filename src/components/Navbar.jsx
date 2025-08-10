@@ -2,6 +2,8 @@ import { useState,useEffect } from "react";
 import { IoMdSearch } from "react-icons/io";
 import useStore from "../utils/Store";
 const COVALENT_API_KEY = import.meta.env.VITE_COVALENT_API_KEY;
+import { ToastContainer, toast } from 'react-toastify';
+import { ethers } from "ethers";
 
 
 const Navbar = () => {
@@ -31,6 +33,46 @@ const Navbar = () => {
     }
 
     const seeWallet = async() => {
+        if (address === "") {
+            toast('Invalid Address', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                });
+            return;
+        }
+        // if (!ethers.utils.isAddress(address)) {
+        //     toast('Invalid Address', {
+        //         position: "top-right",
+        //         autoClose: 5000,
+        //         hideProgressBar: false,
+        //         closeOnClick: true,
+        //         pauseOnHover: false,
+        //         draggable: true,
+        //         progress: undefined,
+        //         theme: "dark",
+        //         });
+        //     return;
+        // }
+        console.log(ethers.utils.isAddress(address))
+        if (chainName === "") {
+            toast('Invalid Chain Name', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                });
+            return;
+        }
         const nftUrl = `https://api.covalenthq.com/v1/${chainName}/address/${address}/balances_nft/`;
         const nftOptions = {method: 'GET', headers: {Authorization: `Bearer ${COVALENT_API_KEY}`}, body: undefined};
 
@@ -78,8 +120,9 @@ const Navbar = () => {
                     <option value="arbitrum-mainnet">Arbitrum</option>
                     <option value="optimism-mainnet">Optimism</option>
                 </select>
-                 <button className="bg-dim-gray text-white p-2 rounded-lg cursor-pointer" onClick={seeWallet}><IoMdSearch /></button>
+                 <button className="bg-dim-gray text-white p-2 rounded-lg cursor-pointer" onClick={seeWallet} ><IoMdSearch /></button>
                 </div>
+                <ToastContainer/>
             </nav>
         </>
     );
