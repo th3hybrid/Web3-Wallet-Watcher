@@ -3,7 +3,7 @@ import { IoMdSearch } from "react-icons/io";
 import useStore from "../utils/Store";
 const COVALENT_API_KEY = import.meta.env.VITE_COVALENT_API_KEY;
 import { ToastContainer, toast } from 'react-toastify';
-import { ethers } from "ethers";
+import { isAddress } from "ethers";
 
 
 const Navbar = () => {
@@ -28,12 +28,20 @@ const Navbar = () => {
         }
     }, []);
 
+    useEffect(() => {
+        const addressStored = JSON.parse(localStorage.getItem('address')) || "";
+        const chainNameStored = JSON.parse(localStorage.getItem('chainName')) || "";
+        setAddress(addressStored);
+        setChainName(chainNameStored);
+        seeWallet();
+    }, [address,chainName]);
+
     const handleChange = (e) => {
         setAddress(e.target.value);
     }
 
     const seeWallet = async() => {
-        if (address === "") {
+        if (!isAddress(address)) {
             toast('Invalid Address', {
                 position: "top-right",
                 autoClose: 5000,
@@ -46,20 +54,6 @@ const Navbar = () => {
                 });
             return;
         }
-        // if (!ethers.utils.isAddress(address)) {
-        //     toast('Invalid Address', {
-        //         position: "top-right",
-        //         autoClose: 5000,
-        //         hideProgressBar: false,
-        //         closeOnClick: true,
-        //         pauseOnHover: false,
-        //         draggable: true,
-        //         progress: undefined,
-        //         theme: "dark",
-        //         });
-        //     return;
-        // }
-        console.log(ethers.utils.isAddress(address))
         if (chainName === "") {
             toast('Invalid Chain Name', {
                 position: "top-right",
@@ -94,6 +88,8 @@ const Navbar = () => {
         console.log(tokenData);
         console.log(nftData);
         console.log(txData);
+        localStorage.setItem('address', JSON.stringify(address));
+        localStorage.setItem('chainName', JSON.stringify(chainName));
         setTokenBalancesInfo(tokenData.data.items);
         setNftBalancesInfo(nftData.data.items);
         setRecentTransactionsInfo(txData.data.items);
