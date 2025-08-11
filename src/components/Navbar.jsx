@@ -31,6 +31,7 @@ const Navbar = () => {
     useEffect(() => {
         const addressStored = JSON.parse(localStorage.getItem('address')) || "";
         const chainNameStored = JSON.parse(localStorage.getItem('chainName')) || "";
+        if(addressStored === "" || chainNameStored === "") return;
         setAddress(addressStored);
         setChainName(chainNameStored);
         seeWallet();
